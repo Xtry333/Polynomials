@@ -28,7 +28,7 @@ class Poly {
         }
     }
 
-    length() {
+    getLength() {
         return this.mlp.length;
     }
 
