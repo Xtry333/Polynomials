@@ -18,6 +18,10 @@ body #container .poly-in {
 body #container .poly-in:focus {
   border: #00327c 2px solid;
 }
+body #container #symbol1 {
+  cursor: pointer;
+  text-decoration: gray underline;
+}
 body #container ::selection {
   background: red;
 }

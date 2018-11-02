@@ -7,27 +7,43 @@ var addMul = 'add';
 $(function() {
     ctx = plot1.getContext("2d");
     canvasCross();
+
+    function calc() {
+        p1 = new Poly($(".poly-in")[0].value, undefined);
+        p2 = new Poly($(".poly-in")[1].value, undefined);
+        if (addMul == 'add') {
+            pRes = p1.add(p2);
+            symbol1.innerText = " + ";
+        } else {
+            pRes = p1.mul(p2);
+            symbol1.innerText = " * ";
+        }
+        $("#out").text(pRes.toString());
+        canvasClear();
+        canvasCross();
+        canvasDraw(p1.calculate(-250, 1, 251), "#ff0000");
+        canvasDraw(p2.calculate(-250, 1, 251), "#00ff00");
+        canvasDraw(pRes.calculate(-250, 1, 251), "#0000ff");
+        //canvasDraw(pRes.derivative().calculate(-250, 1, 250), "#ff0000");
+        //canvasDraw(pRes.derivative().calculate(-250, 1, 250), "#ff0000");
+    }
+
     $(".poly-in").bind({
-        input: function() {
-            p1 = new Poly($(".poly-in")[0].value, undefined);
-            p2 = new Poly($(".poly-in")[1].value, undefined);
+        input: calc
+    });
+
+    $("#symbol1").bind({
+        click: function () {
+            addMul = addMul == 'add' ? 'mul' : 'add';
             if (addMul == 'add') {
-                pRes = p1.add(p2);
                 symbol1.innerText = " + ";
             } else {
-                pRes = p1.mul(p2);
                 symbol1.innerText = " * ";
             }
-            $("#out").text(pRes.toString());
-            canvasClear();
-            canvasCross();
-            canvasDraw(p1.calculate(-250, 1, 251), "#ff0000");
-            canvasDraw(p2.calculate(-250, 1, 251), "#00ff00");
-            canvasDraw(pRes.calculate(-250, 1, 251), "#0000ff");
-            //canvasDraw(pRes.derivative().calculate(-250, 1, 250), "#ff0000");
-            //canvasDraw(pRes.derivative().calculate(-250, 1, 250), "#ff0000");
+            calc();
         }
     });
+
 });
 
 function canvasDraw(arr, color) {
