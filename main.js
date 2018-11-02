@@ -13,8 +13,10 @@ $(function() {
             p2 = new Poly($(".poly-in")[1].value, undefined);
             if (addMul == 'add') {
                 pRes = p1.add(p2);
+                symbol1.innerText = " + ";
             } else {
                 pRes = p1.mul(p2);
+                symbol1.innerText = " * ";
             }
             $("#out").text(pRes.toString());
             canvasClear();
