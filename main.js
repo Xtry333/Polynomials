@@ -20,7 +20,7 @@ $(function() {
             canvasClear();
             canvasCross();
             canvasDraw(p1.calculate(-250, 1, 251), "#ff0000");
-            canvasDraw(p2.calculate(-250, 1, 251), "#00ffff");
+            canvasDraw(p2.calculate(-250, 1, 251), "#00ff00");
             canvasDraw(pRes.calculate(-250, 1, 251), "#0000ff");
             //canvasDraw(pRes.derivative().calculate(-250, 1, 250), "#ff0000");
             //canvasDraw(pRes.derivative().calculate(-250, 1, 250), "#ff0000");
@@ -40,7 +40,7 @@ function canvasDraw(arr, color) {
         ctx.beginPath();
         //ctx.moveTo(0, plot1.height/2 + arr[i]);
         for(var i = 0; i < arr.length; i++) {
-            ctx.lineTo((plot1.width - arr.length) / 2 + i, 250-arr[i]-.5);
+            ctx.lineTo((plot1.width - arr.length) / 2 + i, 250-(arr[i])-.5);
         }
         ctx.stroke();
         ctx.closePath();
