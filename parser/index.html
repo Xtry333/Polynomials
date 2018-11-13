@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>HTML Parser</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <script src="parser.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <h1>HTML Parser</h1>
+            <textarea class="parser-text" id="textIn">
+Ania ma 3 koty:
+1. Czarny kot Bruno
+2. Rudy kot Leon
+3. Biała kotka Atena
+Atena często miaucze “miau”, Leon dużo mruczy “purrr”, a Bruno to w sumie głównie śpi i mało go słychać.
+
+
+>>>Dlaczego Słowacki wzbudza w nas zachwyt i miłość? Dlatego, panowie, że Słowacki wielkim poetą był!
+>>Poezja Słowackiego nikogo nie zachwyca
+>Jak to nie zachwyca Gałkiewicza, jeśli tysiąc razy tłumaczyłem Gałkiewiczowi, że go zachwyca.</textarea>
+            
+            <textarea class="parser-text" id="textOut"></textarea>
+            <div class="parser-text" id="divOut">
+
+            </div>
+        </div>
+    </body>
+</html>

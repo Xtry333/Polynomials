@@ -113,7 +113,7 @@ class Poly {
         return v;
     }
 
-    toString() {
+    toString(formated) {
         var res = String();
         var pow = this.mlp.length - 1;
         this.mlp.forEach(e => {
@@ -138,6 +138,9 @@ class Poly {
         });
         if (res.length == 0) {
             return 0;
+        }
+        if (formated != undefined && formated == true) {
+            
         }
         return res.slice(0, -1).replace(/(.)(\-|\+)(?=.)/g, "$1 $2 ");
     }

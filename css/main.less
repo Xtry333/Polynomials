@@ -1,3 +1,7 @@
+@color-bg: rgb(173, 198, 230);
+@color-main: lightblue;
+@color-border: rgb(135, 171, 250);
+
 body {
     background: black;
     #container {
@@ -11,12 +15,30 @@ body {
         font-family: 'Roboto', sans-serif;
     
         .poly-in {
-            background: rgb(173, 198, 230);
-            border: rgb(135, 171, 250) 2px solid;
+            background: @color-bg;
+            border: @color-border 2px solid;
         }
     
         .poly-in:focus {
             border: rgb(0, 50, 124) 2px solid;
+        }
+
+        .parser-text {
+            background: @color-bg;
+            border: @color-border 2px solid;
+            width: 95%;
+            max-width: 99%;
+            height: 250px;
+            margin: auto;
+            box-sizing: border-box;
+        }
+    
+        .parser-text:focus {
+            border: rgb(0, 50, 124) 2px solid;
+        }
+
+        div#divOut {
+            text-align: left;
         }
 
         #symbol1 {

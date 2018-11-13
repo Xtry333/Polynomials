@@ -18,6 +18,21 @@ body #container .poly-in {
 body #container .poly-in:focus {
   border: #00327c 2px solid;
 }
+body #container .parser-text {
+  background: #adc6e6;
+  border: #87abfa 2px solid;
+  width: 95%;
+  max-width: 99%;
+  height: 250px;
+  margin: auto;
+  box-sizing: border-box;
+}
+body #container .parser-text:focus {
+  border: #00327c 2px solid;
+}
+body #container div#divOut {
+  text-align: left;
+}
 body #container #symbol1 {
   cursor: pointer;
   text-decoration: gray underline;
