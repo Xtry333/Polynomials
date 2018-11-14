@@ -8,6 +8,7 @@ body #container {
   border-radius: 10px;
   margin: auto;
   padding: 15px;
+  padding-bottom: 50px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
 }
@@ -23,7 +24,7 @@ body #container .parser-text {
   border: #87abfa 2px solid;
   width: 95%;
   max-width: 99%;
-  height: 250px;
+  min-height: 250px;
   margin: auto;
   box-sizing: border-box;
 }
@@ -44,4 +45,11 @@ body #container #plot1 {
   background: white;
   width: 500px;
   height: 500px;
+}
+body #container blockquote {
+  outline: 1px solid #739ffd;
+  font-style: oblique;
+}
+body #container q {
+  font-style: oblique;
 }
