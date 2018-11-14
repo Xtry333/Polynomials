@@ -2,30 +2,39 @@ $(function() {
     function parse() {
         var lines = textIn.value.replace("\r", "").split("\n");
 
-        let out = [];
+        var out = [];
 
-        var indent = 0;
-        for (let i = 0; i < lines.length; i++) {
-            let e = lines[i];
-            while (true) {
-                if (e[indent] == ">") {
-                    indent++;
-                } else {
-                    break;
+        for (let tries = 0; tries < 1; tries++) {
+            var flag = false;
+            var flags = 0;
+            for (let i = 0; i < lines.length; i++) {
+                let e = lines[i];
+                if (e.startsWith(">") && !flag) {
+                    out.push("[S]");
+                    flag = true;
+                    flags++;
+                }
+                out.push(e.replace(">", ""));
+                if (!e.startsWith(">") && flag) {
+                    out.push("[E]");
+                    flag = false;
+                    flags--;
                 }
             }
-            
-            console.log(indent);
+            lines = out;
+            out = [];
         }
 
-        //console.log(indent);
+        for (let i = 0; i < flags; i++) {
+            out.push("[E]");
+        }
 
-        var s = out.join("\n").replace(/\[S\]/gm, "<blockquote><p>").replace(/\[E\]/gm, "</p></blockquote>");
+        var s = lines.join("\r\n").replace(/\[S\]/gm, "<blockquote><p>").replace(/\[E\]/gm, "</p></blockquote>");
         textOut.value = s;
         divOut.innerHTML = s;
     };
 
-    $("#textInput").bind({
+    $("#textIn  ").bind({
         input: parse
     });
     parse();
