@@ -14,35 +14,24 @@ $(function() {
     }
 
     function parseComments() {
-        var lines = text.replace(/\r/g, "").split("\n");
+        var txt = text;
 
-        var indent = 0;
-        var lastIndent = 0;
-
-        for (var line = 0; line < lines.length; line++) {
-            const e = lines[line];
-            var fix = "";
-            indent = countIndent(e);
-            if (indent > lastIndent) {
-                for (var i = 0; i < indent; i++) {
-                    fix += "[S]";
-                }
-                lines[line] = fix + e;
-            } else if (indent < lastIndent) {
-                for (var i = 0; i < lastIndent - indent; i++) {
-                    fix += "[E]";
-                }
-                if (true) {
-                    lines[line - 1] = lines[line - 1] + fix;
-                }
-                if (line == lines.length - 1) {
-                    lines[line] = e + fix;
+        for (let i = 0; i < 64; i++) {
+            txt = txt.replace(/(^\>+)((.*\n\>)*.*)/gm, "$1<blockquote>$2</blockquote>");
+            var lines = txt.split("\n");
+            var counter = 0;
+            for (let l = 0; l < lines.length; l++) {
+                if (lines[l].startsWith(">")) {
+                    lines[l] = lines[l].substr(1);
+                    counter++;
                 }
             }
-            lastIndent = indent;
+            txt = lines.join("\n");
+            if (counter == 0) {
+                break;
+            }
         }
-
-        text = lines.join("\r\n").replace(/\>/gm, "").replace(/\[S\]/gm, "<blockquote>").replace(/\[E\]/gm, "</blockquote>");
+        text = txt;
     };
 
     function parseList() {
@@ -83,7 +72,7 @@ $(function() {
         divOut.innerHTML = text;
     };
 
-    $("#textIn").bind({
+    $("#textIn").on({
         input: parse
     });
     parse();

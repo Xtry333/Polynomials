@@ -28,11 +28,11 @@ $(function() {
         //canvasDraw(pRes.derivative().calculate(-250, 1, 250), "#ff0000");
     }
 
-    $(".poly-in").bind({
+    $(".poly-in").on({
         input: calc
     });
 
-    $("#symbol1").bind({
+    $("#symbol1").on({
         click: function () {
             addMul = addMul == 'add' ? 'mul' : 'add';
             if (addMul == 'add') {
