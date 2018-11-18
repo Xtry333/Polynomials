@@ -55,6 +55,7 @@ body #container q {
 }
 body #container table {
   border-collapse: collapse;
+  margin: auto;
 }
 body #container table td,
 body #container table th {
