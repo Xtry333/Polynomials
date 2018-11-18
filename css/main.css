@@ -53,3 +53,12 @@ body #container blockquote {
 body #container q {
   font-style: oblique;
 }
+body #container table {
+  border-collapse: collapse;
+}
+body #container table td,
+body #container table th {
+  border: 1px black solid;
+  width: 200px;
+  height: 30px;
+}
