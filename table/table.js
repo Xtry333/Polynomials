@@ -19,7 +19,7 @@ $(function() {
                     var element = {};
                     for (let i = 0; i < tdata.length; i++) {
                         var thText = thead[i].innerText.replace(/\[.*?\]/g, "");
-                        if (thText != "Nr" && thText != "Number") {
+                        if (thText != "Nr" && thText != "Number" && thText != "") {
                             element[thText] = tdata[i].innerText;
                         }
                     }
