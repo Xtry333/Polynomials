@@ -1,5 +1,7 @@
-
 $(function() {
+
+    /// Region Table Parser
+
     var tables = [];
 
     var t = document.getElementsByTagName("table");
@@ -36,4 +38,6 @@ $(function() {
     }
     console.log(tables);
     textOut.innerText = JSON.stringify(tables, null, "    ");
+
+    /// End Region
 });
