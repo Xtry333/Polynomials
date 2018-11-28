@@ -17,7 +17,7 @@ $(function() {
         var txt = text;
 
         for (let i = 0; i < 64; i++) {
-            txt = txt.replace(/(^\>+)((.*\n\>)*.*)/gm, "$1<blockquote>$2</blockquote>");
+            txt = txt.replace(/(^\>+)((.*\n\>)*.*)/gm, "$1<blockquote><p>$2</p></blockquote>");
             var lines = txt.split("\n");
             var counter = 0;
             for (let l = 0; l < lines.length; l++) {
@@ -59,6 +59,20 @@ $(function() {
         text = lines.join("\r\n");
     };
 
+    function parseParagraphs() {
+        var lines = text.replace(/\r/g, "").split("\n");
+
+        for (var line = 0; line < lines.length; line++) {
+            const e = lines[line].replace(/\r\n/gm, "");
+            if ((!e.startsWith("<") && !e.endsWith(">") && e != "")) {
+                //console.log(e);
+                lines[line] = "<p>" + lines[line] + "</p>";
+            }
+        }
+
+        text = lines.join("\r\n");
+    }
+
     function parse() {
         text = textIn.value;
         parseComments();
@@ -66,6 +80,9 @@ $(function() {
 
         text = text.replace(/\\\'/gm, "&#39;"); // Single quotes to html entity
         text = text.replace(/(?:^|( ))([\"\'])(.*?)\2/gm, "$1<q>$3</q>"); // Double quotes
+        text = text.replace(/(?:^|([A-Za-z ]))(\_)(.*?)\_/gm, "$1<sub>$3</sub>"); // Underscore to sub
+        text = text.replace(/(?:^|([A-Za-z ]))(\^)(.*?)\^/gm, "$1<sup>$3</sup>"); // Hat to sup
+        parseParagraphs(); // Line to <p>
         text = text.replace(/(^\r\n)+$/gm, ""); // Multiple new lines to one new line
 
         textOut.value = text;

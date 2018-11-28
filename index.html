@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Polynomial</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <script src="main.js"></script>
-        <script src="poly.js"></script>
-    </head>
-    <body>
-        <div id="container">
-            <h1>Polynomial</h1>
-            <input class="poly-in"><span id="symbol1"> + </span><input class="poly-in">
-            <p id="out">0</p>
-            <div>
-                <canvas id="plot1" width="500px" height="500px"></canvas>
-            </div>
-        </div>
-    </body>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tasks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0px;
+            text-align: left;
+        }
+
+        body {
+            counter-reset: section -1;
+        }
+
+        li:before {
+            counter-increment: section;
+            content: "✗ Zadanie " counter(section)". ";
+        }
+
+        li.ready:before {
+            counter-increment: section;
+            content: "✓ Zadanie " counter(section)". ";
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Zadania</h1>
+        <ul>
+            <li class="ready"><a href="poly/">Wielomiany (JS)</a></li>
+            <li class="ready"><a href="other/stack.py">Stos (PY)</a></li>
+            <li class="ready"><a href="">Macierze (PY)</a></li>
+            <li class="ready"><a href="">CSV 1 (PY)</a></li>
+            <li class="ready"><a href="">Notatnik (PY)</a></li>
+            <li class="ready"><a href="">Kopiowanie z folderów z listy (PY)</a></li>
+            <li class="ready"><a href="">CSV 2, średnie (PY)</a></li>
+            <li class=""><a href="">Komentarze, bot</a></li>
+            <li class="ready"><a href="parser/">Przerwarzanie do HTML, cytaty (JS)</a></li>
+            <li class="ready"><a href="table/">Tabelka (JS)</a></li>
+            <li class=""><a href="">Informacje o CPU i RAM</a></li>
+            <li class=""><a href="">Zrzut wątku z forum</a></li>
+        </ul>
+    </div>
+</body>
 </html>

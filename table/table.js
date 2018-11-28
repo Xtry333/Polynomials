@@ -1,22 +1,39 @@
-var tables = [];
+
 $(function() {
-    var t = document.querySelectorAll("table");
-    var tN = 0;
-    t.forEach(e => {
-        tables[tN] = [];
-        var headers = e.querySelectorAll("tr > th");
-        var data = e.querySelectorAll("tr > td");
-        for (let line = 0; line < data.length; line += headers.length) {
-            var element = {};
-            for (var i = 0; i < headers.length; i++) {
-                var h = headers[i].innerText;
-                var d = data[line + i].innerText;
-                element[h] = d;
+    var tables = [];
+
+    var t = document.getElementsByTagName("table");
+
+    for (var tNum = 0; tNum < t.length; tNum++) {
+        const tr = t[tNum].getElementsByTagName("tr");
+        tables[tNum] = [];
+        var thead = [];
+
+        for (var rowNum = 0; rowNum < tr.length; rowNum++) {
+            const row = tr[rowNum];
+            var tdata = row.getElementsByTagName("td");
+            if (tdata.length > 0) {
+                if (thead.length >= tdata.length) {
+                    var element = {};
+                    for (let i = 0; i < tdata.length; i++) {
+                        var thText = thead[i].innerText.replace(/\[.*?\]/g, "");
+                        if (thText != "Nr" && thText != "Number") {
+                            element[thText] = tdata[i].innerText;
+                        }
+                    }
+                    tables[tNum].push(element);
+                } else {
+                    var element = [];
+                    for (let i = 0; i < tdata.length; i++) {
+                        element[i] = tdata[i].innerText;
+                    }
+                    tables[tNum].push(element);
+                }
+            } else {
+                thead = row.getElementsByTagName("th");
             }
-            tables[tN].push(element);
-            //console.log(element);
         }
-        tN++;
-    });
+    }
     console.log(tables);
+    textOut.innerText = JSON.stringify(tables, null, "    ");
 });

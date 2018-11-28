@@ -1,6 +1,9 @@
 body {
   background: black;
 }
+body a {
+  color: inherit;
+}
 body #container {
   width: 70%;
   background: lightblue;
