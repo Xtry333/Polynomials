@@ -19,7 +19,7 @@ $(function() {
                     var element = {};
                     for (let i = 0; i < tdata.length; i++) {
                         var thText = thead[i].innerText.replace(/\[.*?\]/g, "");
-                        if (thText != "Nr" && thText != "Number" && thText != "") {
+                        if (thText != "Nr" && thText != "Number" && thText != "" && thText != "#") {
                             element[thText] = tdata[i].innerText;
                         }
                     }
@@ -37,7 +37,7 @@ $(function() {
         }
     }
     console.log(tables);
+    /// End Region
     textOut.innerText = JSON.stringify(tables, null, "    ");
 
-    /// End Region
 });
