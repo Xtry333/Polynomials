@@ -42,7 +42,7 @@ body #container #symbol1 {
   text-decoration: gray underline;
 }
 body #container ::selection {
-  background: red;
+  background: #9de8ce;
 }
 body #container #plot1 {
   background: white;
