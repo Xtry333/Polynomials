@@ -1,6 +1,6 @@
 var l = 0;
 var img;
-var diff = 140;
+var diff = 9;
 var noElements;
 var xS;
 var yS;
@@ -10,6 +10,7 @@ class Puzzle {
     constructor(x, y) {
         this.pos = createVector(x, y);
         this.offset = createVector(x, y);
+        this.snapped = false;
     }
 
     setPos(x, y) {
@@ -18,7 +19,7 @@ class Puzzle {
     }
 
     clicked() {
-        if (mouseX > this.pos.x && mouseX < this.pos.x + xS && mouseY > this.pos.y && mouseY < this.pos.y + yS && mouseIsPressed && !selected) {
+        if (mouseX > this.pos.x && mouseX < this.pos.x + xS && mouseY > this.pos.y && mouseY < this.pos.y + yS && mouseIsPressed && !selected && !this.snapped) {
             selected = this;
             return this;
         }
@@ -27,11 +28,16 @@ class Puzzle {
     snap() {
         if (abs(this.pos.x - this.offset.x) < 10 && abs(this.pos.y - this.offset.y) < 10) {
             this.setPos(this.offset.x, this.offset.y);
+            this.snapped = true;
         }
     }
 
     display() {
         image(img, this.pos.x, this.pos.y, xS, yS, this.offset.x, this.offset.y, xS, yS);
+    }
+
+    shuffle() {
+        this.setPos(random(img.width - xS), random(img.height - yS));
     }
 }
 
@@ -47,6 +53,9 @@ function setup() {
             for (let x = 0; x < noElements; x++) {
                 puzzles.push(new Puzzle(xS * x, yS * y));                
             }
+        }
+        for (const p of puzzles) {
+            p.shuffle();
         }
     });
 }
