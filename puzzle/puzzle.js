@@ -24,6 +24,12 @@ class Puzzle {
         }
     }
 
+    snap() {
+        if (abs(this.pos.x - this.offset.x) < 10 && abs(this.pos.y - this.offset.y) < 10) {
+            this.setPos(this.offset.x, this.offset.y);
+        }
+    }
+
     display() {
         image(img, this.pos.x, this.pos.y, xS, yS, this.offset.x, this.offset.y, xS, yS);
     }
@@ -35,8 +41,8 @@ function setup() {
     background(127, 127, 200);
     img = loadImage("flowers.jpg", () => {
         noElements = round(sqrt(diff));
-        xS = img.width / noElements;
-        yS = img.height / noElements;
+        xS = round(img.width / noElements);
+        yS = round(img.height / noElements);
         for (let y = 0; y < noElements; y++) {
             for (let x = 0; x < noElements; x++) {
                 puzzles.push(new Puzzle(xS * x, yS * y));                
@@ -92,5 +98,8 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-    selected = null;
+    if (selected) {
+        selected.snap();
+        selected = null;
+    }
 }
