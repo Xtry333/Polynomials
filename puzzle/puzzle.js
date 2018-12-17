@@ -85,6 +85,7 @@ function mousePressed() {
         }
     }
     if (selected) {
+        //console.log(selected);
         puzzles.filter(() => {selected});
         puzzles.push(selected);
     }
