@@ -111,17 +111,22 @@ function draw() {
     background(127, 127, 200);
 
     textAlign(CENTER);
-    if (!gotFileBool) {
+    if (!gotFileBool) {        
+        stroke(0);
         text('Drag an image file onto the canvas to change/upload a new one.\nType d(<diff>) in console to change difficulty.', width/2, height/2);
     }
 
-    for (let y = 0; y <= noElements; y++) {
-        for (let x = 0; x <= noElements; x++) {
+    // #region Puzzles frame
+    for (let y = 1; y < noElements; y++) {
+        for (let x = 1; x < noElements; x++) {
             stroke(77, 77, 77);
             line(xS * x, 0, xS * x, img.height);
             line(0, yS * y, img.width, yS * y);
         }
     }
+    noFill();
+    rect(0,0, img.width, img.height);
+    // #endregion
 
     /*//#region Guidelines
     stroke(0);
