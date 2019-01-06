@@ -87,6 +87,16 @@ function removePuzzle(p) {
     puzzles = puzzles.filter((e) => {return e != p});
 }
 
+function allSnapped() {
+    var a = 0;
+    puzzles.forEach(e => {
+        if (e.snapped) {
+            a++;
+        }
+    });
+    return a == puzzles.length;
+}
+
 function d(df) {
     diff = df;
     reloadImage();
@@ -105,16 +115,15 @@ function draw() {
         text('Drag an image file onto the canvas to change/upload a new one.\nType d(<diff>) in console to change difficulty.', width/2, height/2);
     }
 
-    for (let y = 0; y < noElements; y++) {
-        for (let x = 0; x < noElements; x++) {
-            //puzzles.push(new Puzzle(xS * x, yS * y));     
+    for (let y = 0; y <= noElements; y++) {
+        for (let x = 0; x <= noElements; x++) {
             stroke(77, 77, 77);
             line(xS * x, 0, xS * x, img.height);
             line(0, yS * y, img.width, yS * y);
         }
     }
 
-    //#region Guidelines
+    /*//#region Guidelines
     stroke(0);
     line(5, 15, width - 5, 15);
     line(5, 10, 5, 20);
@@ -129,7 +138,11 @@ function draw() {
     text(width, width / 2, 30);
     textAlign(LEFT);
     text(height, 30, height / 2);
-    //#endregion 
+    //#endregion */
+
+    if (allSnapped()) {
+        background(127, 127, 200);
+    }
 
     puzzles.forEach(e => {
         if (selected) {
