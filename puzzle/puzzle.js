@@ -6,6 +6,9 @@ var xS;
 var yS;
 var puzzles = [];
 var selected;
+
+var gotFileBool = false;
+
 class Puzzle {
     constructor(x, y) {
         this.pos = createVector(x, y);
@@ -44,11 +47,13 @@ class Puzzle {
 function setup() {
     var cnv = createCanvas(windowWidth, windowHeight);
     cnv.style('display', 'block');
+    cnv.drop(gotFile);
     background(127, 127, 200);
     img = loadImage("flowers.jpg", () => {
         noElements = round(sqrt(diff));
         xS = round(img.width / noElements);
         yS = round(img.height / noElements);
+        puzzles = [];
         for (let y = 0; y < noElements; y++) {
             for (let x = 0; x < noElements; x++) {
                 puzzles.push(new Puzzle(xS * x, yS * y));                
@@ -60,6 +65,32 @@ function setup() {
     });
 }
 
+function gotFile(file, abc) {
+    if (file.type === 'image') {
+        img = createImg(file.data).hide();
+        console.log(file);
+        console.log(file.data.length);
+
+        setTimeout(() => {
+            gotFileBool = true;
+            noElements = round(sqrt(diff));
+            xS = round(img.width / noElements);
+            yS = round(img.height / noElements);
+            puzzles = [];
+            for (let y = 0; y < noElements; y++) {
+                for (let x = 0; x < noElements; x++) {
+                    puzzles.push(new Puzzle(xS * x, yS * y));                
+                }
+            }
+            for (const p of puzzles) {
+                p.shuffle();
+            }
+        }, 1);
+    } else {
+        console.log('Not an image file!');
+    }
+  }
+
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
     background(127, 127, 200);
@@ -67,6 +98,11 @@ function windowResized() {
 
 function draw() {
     background(127, 127, 200);
+
+    textAlign(CENTER);
+    if (!gotFileBool) {
+        text('Drag an image file onto the canvas.', width/2, height/2);
+    }
 
     //#region Guidelines
     stroke(0);
