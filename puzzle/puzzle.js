@@ -29,10 +29,11 @@ class Puzzle {
     }
 
     snap() {
-        if (abs(this.pos.x - this.offset.x) < 10 && abs(this.pos.y - this.offset.y) < 10) {
+        if (abs(this.pos.x - this.offset.x) < max(xS * 0.05, 10) && abs(this.pos.y - this.offset.y) < max(yS * 0.05, 10)) {
             this.setPos(this.offset.x, this.offset.y);
             this.snapped = true;
         }
+        return this.snapped;
     }
 
     display() {
@@ -50,19 +51,9 @@ function setup() {
     cnv.drop(gotFile);
     background(127, 127, 200);
     img = loadImage("flowers.jpg", () => {
-        noElements = round(sqrt(diff));
-        xS = round(img.width / noElements);
-        yS = round(img.height / noElements);
-        puzzles = [];
-        for (let y = 0; y < noElements; y++) {
-            for (let x = 0; x < noElements; x++) {
-                puzzles.push(new Puzzle(xS * x, yS * y));                
-            }
-        }
-        for (const p of puzzles) {
-            p.shuffle();
-        }
+        reloadImage();
     });
+    console.log('Drag an image file onto the canvas to change/upload a new one.\nType d(<diff>) in console to change difficulty.');
 }
 
 function gotFile(file, abc) {
@@ -70,23 +61,36 @@ function gotFile(file, abc) {
         img = createImg(file.data).hide();
         setTimeout(() => {
             gotFileBool = true;
-            noElements = round(sqrt(diff));
-            xS = round(img.width / noElements);
-            yS = round(img.height / noElements);
-            puzzles = [];
-            for (let y = 0; y < noElements; y++) {
-                for (let x = 0; x < noElements; x++) {
-                    puzzles.push(new Puzzle(xS * x, yS * y));                
-                }
-            }
-            for (const p of puzzles) {
-                p.shuffle();
-            }
+            reloadImage();
         }, 10);
     } else {
         console.log('Not an image file!');
     }
-  }
+}
+
+function reloadImage() {
+    noElements = round(sqrt(diff));
+    xS = round(img.width / noElements);
+    yS = round(img.height / noElements);
+    puzzles = [];
+    for (let y = 0; y < noElements; y++) {
+        for (let x = 0; x < noElements; x++) {
+            puzzles.push(new Puzzle(xS * x, yS * y));                
+        }
+    }
+    for (const p of puzzles) {
+        p.shuffle();
+    }
+}
+
+function removePuzzle(p) {
+    puzzles = puzzles.filter((e) => {return e != p});
+}
+
+function d(df) {
+    diff = df;
+    reloadImage();
+}
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
@@ -98,7 +102,16 @@ function draw() {
 
     textAlign(CENTER);
     if (!gotFileBool) {
-        text('Drag an image file onto the canvas.', width/2, height/2);
+        text('Drag an image file onto the canvas to change/upload a new one.\nType d(<diff>) in console to change difficulty.', width/2, height/2);
+    }
+
+    for (let y = 0; y < noElements; y++) {
+        for (let x = 0; x < noElements; x++) {
+            //puzzles.push(new Puzzle(xS * x, yS * y));     
+            stroke(77, 77, 77);
+            line(xS * x, 0, xS * x, img.height);
+            line(0, yS * y, img.width, yS * y);
+        }
     }
 
     //#region Guidelines
@@ -134,14 +147,17 @@ function mousePressed() {
     }
     if (selected) {
         //console.log(selected);
-        puzzles.filter(() => {selected});
+        removePuzzle(selected);
         puzzles.push(selected);
     }
 }
 
 function mouseReleased() {
     if (selected) {
-        selected.snap();
+        if (selected.snap()) {
+            removePuzzle(selected);
+            puzzles.unshift(selected);
+        }
         selected = null;
     }
 }
