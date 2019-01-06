@@ -68,9 +68,6 @@ function setup() {
 function gotFile(file, abc) {
     if (file.type === 'image') {
         img = createImg(file.data).hide();
-        console.log(file);
-        console.log(file.data.length);
-
         setTimeout(() => {
             gotFileBool = true;
             noElements = round(sqrt(diff));
@@ -85,7 +82,7 @@ function gotFile(file, abc) {
             for (const p of puzzles) {
                 p.shuffle();
             }
-        }, 1);
+        }, 10);
     } else {
         console.log('Not an image file!');
     }
