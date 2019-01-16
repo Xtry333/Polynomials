@@ -24,8 +24,10 @@ class Node:
 		
 class Stack:
     topNode = None
+    lgt = 0
 
     def Push(self, value):
+        self.lgt += 1
         n = Node(value)
         if self.topNode is not None:
             n.lowerNode = self.topNode
@@ -41,6 +43,7 @@ class Stack:
         if self.topNode is None:
             return None
         else:
+            self.lgt -= 1
             n = self.topNode
             self.topNode = self.topNode.lowerNode
             return n.value
@@ -51,6 +54,9 @@ class Stack:
         else:
             return self.topNode.length() + 1
 
+    def GetLgt(self):
+        return self.lgt
+
     def AsList(self):
         l = []
         if (self.topNode is not None):
@@ -60,6 +66,7 @@ class Stack:
 s = Stack()
 
 print("Peek:", s.Peek())
+print("Lgt:", s.GetLgt())
 print("Length:", s.Length())
 s.Push("Hello")
 s.Push("there")
@@ -67,12 +74,14 @@ s.Push("my")
 
 print("Pop:", s.Pop())
 print("Peek:", s.Peek())
+print("Lgt:", s.GetLgt())
 print("Length:", s.Length())
 s.Push("friend")
 s.Push("!")
 
 print("As List:", s.AsList())
 
+print("Lgt:", s.GetLgt())
 print("Length:", s.Length())
 
 print("Peek:", s.Peek())
@@ -83,5 +92,6 @@ print("Pop:", s.Pop())
 print("Pop:", s.Pop())
 print("Pop:", s.Pop())
 print("Pop:", s.Pop())
+print("Lgt:", s.GetLgt())
 print("Length:", s.Length())
 print("As List:", s.AsList())
