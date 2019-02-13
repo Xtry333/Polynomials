@@ -1,5 +1,5 @@
 <h1>Tasks for scripting langs, written in JS and Python</h1>
-<h1>Polynomials</h1>
+<h2>Polynomials</h2>
 <code>Poly.constructor(array, character);</code><br />
 <code>Poly.add(Poly);</code><br />
 <code>Poly.mul(Poly);</code><br />
