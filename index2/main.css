@@ -1,0 +1,140 @@
+*  {
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+	color: #333;
+	font-size: 1em;
+}
+
+a:link, a:visited, a:hover, a:active {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.container {
+	margin: 50px auto;
+	padding: 0 50px;
+	max-width: 960px;
+}
+
+table { 
+	background: #FFF;
+	border-collapse: collapse;
+  	width: 100%;
+	border-radius: 5px;
+	table-layout: auto;
+}
+
+td, th {
+	padding: 4px;
+	overflow: hidden;
+	text-align: left;
+	vertical-align: middle;
+}
+
+tr:nth-child(odd) {
+  	background-color: #EEE;
+}
+th { 
+	background-color: #DDD; 
+	font-weight: 400;
+}
+th a, td a { 
+	display: block;
+	width: 100%;
+}
+
+th a.sort-by { 
+	padding-right: 18px;
+	position: relative;
+}
+
+a.sort-by:before, a.sort-by:after {
+	border: 4px solid transparent;
+	content: "";
+	display: block;
+	height: 0;
+	right: 5px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+}
+a.sort-by:before {
+	border-bottom-color: #666;
+	margin-top: -9px;
+}
+
+a.sort-by:after {
+	border-top-color: #666;
+	margin-top: 1px;
+}
+
+input {
+	width: 100%;
+}
+
+.table-sum {
+	border-top: #000 1px solid;
+	background: rgb(178, 233, 178) !important;
+}
+
+.table-sum::after {
+	position: absolute;
+	right: 10px;
+	content: "Sum"
+}
+
+.table-average {
+	background: rgb(178, 233, 178) !important;
+}
+
+.table-average:after {
+	position: absolute;
+	right: 10px;
+	content: "Avg"
+}
+
+.table-median {
+	background: rgb(178, 233, 178) !important;
+}
+
+.table-median:after {
+	position: absolute;
+	right: 10px;
+	content: "Med"
+}
+
+td th {
+	display: none !important;
+}
+
+td {
+	position: relative;
+}
+
+td.avg-above:after, td.avg-below:after {
+    border: 6px solid transparent;
+    border-radius: 5px;
+	content: "";
+	display: block;
+	height: 0;
+	right: 15px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+}
+
+td.avg-above:after {
+	border-bottom-color: rgb(52, 255, 86);
+	margin-top: -9px;
+}
+
+td.avg-below:after {
+	border-top-color: rgb(255, 88, 88);
+	margin-top: 1px;
+}
