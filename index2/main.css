@@ -118,23 +118,29 @@ td {
 }
 
 td.avg-above:after, td.avg-below:after {
-    border: 6px solid transparent;
-    border-radius: 5px;
+    border: 4px solid transparent;
+    border-radius: 8px;
 	content: "";
 	display: block;
 	height: 0;
 	right: 15px;
-	top: 50%;
+	margin-top: -13px;
 	position: absolute;
 	width: 0;
 }
 
 td.avg-above:after {
-	border-bottom-color: rgb(52, 255, 86);
-	margin-top: -9px;
+	border-color: rgb(52, 255, 86);
 }
 
 td.avg-below:after {
-	border-top-color: rgb(255, 88, 88);
-	margin-top: 1px;
+	border-color: rgb(255, 88, 88);
+}
+
+.table-global.table-average:after {
+	content: "Global Avg"
+}
+
+.table-global.table-sum:after {
+	content: "Global Sum"
 }
