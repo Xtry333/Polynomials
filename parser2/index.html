@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HTML Parser 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="parser.js"></script>
+</head>
+
+<body>
+    <div id='ui middle aligned center aligned grid'>
+        <div class='column'>
+            <div class='row'>
+                <h1 class='ui center aligned huge header'>HTML Parser</h1>
+            </div>
+            <div class='row'>
+                <form class='ui form'>
+<textarea class="ui segment" id="textIn">#Header.
+*italics* *test*
+_!underline!_
+-!strike!-
+**bold**
+<img src='https://via.placeholder.com/350x50?text=Placeholder+350x50'> </img>
+[https://via.placeholder.com/350x50?text=Placeholder+350x50|**no _!pics!_ *no clicks***]
+#I am #n1
+#And I know how to _!underline!_
+Should I escape those stinky >>*<<?</textarea>
+                </form>
+            </div>
+            <div class='row'>
+                <form class='ui form'>
+                    <textarea class="ui segment" id="textOut"></textarea>
+                </form>
+            </div>
+            <div class="row">
+                <form class='ui form'>
+                    <div class="ui segment" id="divOut"></div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
