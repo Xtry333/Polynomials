@@ -141,6 +141,20 @@ class Graph {
         console.log(this.value)
         if (this.parent) this.parent.print()
     }
+
+    _serialize(whole) {
+        let head = this
+        while (whole && head.parent)
+            head = head.parent
+        let left = null, right = null
+        if (head.childLeft) left = head.childLeft._serialize()
+        if (head.childRight) right = head.childRight._serialize()
+        return { _class: 'Graph', value: head.value, left, right }
+    }
+
+    serialize(whole) {
+        return JSON.stringify(this._serialize(whole))
+    }
 }
 
 let x = new CList()
