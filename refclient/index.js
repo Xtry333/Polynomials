@@ -1,4 +1,4 @@
-class Cyclic {
+class Parser {
     static parse(str) {
         let obj = JSON.parse(str)
         if (obj && obj._class) {
@@ -106,6 +106,14 @@ class CList {
 }
 
 class Graph {
+    static fromArray(arr) {
+        const graph = new Graph(arr.shift().value)
+        for (let n of arr) {
+            graph.set(n.value, n.path)
+        }
+        return graph
+    }
+
     constructor(arg) {
         this._class = 'Graph'
         this.value = arg
@@ -116,21 +124,20 @@ class Graph {
 
     set(node, path) {
         if (node._class == 'Graph') {
-            path = path.split('')
-            let current = this
-            while (path.length > 1) {
-                let d = path.shift()
-                if (d == 'l')
-                    current = this.childLeft
-                if (d == 'r')
-                    current = this.childRight
+            if (path.length > 1) {
+                let c = path[0]
+                path = path.slice(1)
+                if (c == 'l')
+                    this.childLeft.set(node, path)
+                if (c == 'r')
+                    this.childRight.set(node, path)
+            } else {
+                node.parent = this
+                if (path == 'l')
+                    this.childLeft = node
+                if (path == 'r')
+                    this.childRight = node
             }
-            let d = path.shift()
-            if (d == 'l')
-                current.childLeft = node
-            if (d == 'r')
-                current.childRight = node
-            node.parent = current
             return node
         } else {
             return this.set(new Graph(node), path)
@@ -142,36 +149,57 @@ class Graph {
         if (this.parent) this.parent.print()
     }
 
-    _serialize(whole) {
+    getPath() {
         let head = this
-        while (whole && head.parent)
+        let node = this
+        let path = []
+        while (head.parent) {
             head = head.parent
-        let left = null, right = null
-        if (head.childLeft) left = head.childLeft._serialize()
-        if (head.childRight) right = head.childRight._serialize()
-        return { _class: 'Graph', value: head.value, left, right }
+            if (node === head.childLeft)
+                path.push('l')
+            if (node === head.childRight)
+                path.push('r')
+            node = head
+        }
+        return path.reverse().join('')
     }
 
-    serialize(whole) {
-        return JSON.stringify(this._serialize(whole))
+    top() {
+        let head = this
+        while (head.parent)
+            head = head.parent
+        return head
+    }
+
+    _serialize(arr) {
+        let head = this
+        let left = null, right = null
+        arr.push({ value: head.value, path: head.getPath() })
+        if (head.childLeft) left = head.childLeft._serialize(arr)
+        if (head.childRight) right = head.childRight._serialize(arr)
+        return arr
+    }
+
+    serialize() {
+        const array = []
+        const graph = { _class: 'Graph', array: this.top()._serialize(array) }
+        return JSON.stringify(graph)
     }
 }
 
-let x = new CList()
-x.add(1)
-x.add(2)
-x.add(3)
-x.add(4)
-x.add(5)
+let data = []
 
-let y = new Graph(0)
-y.set(1, 'l')
-y.set(2, 'r')
-y.set(3, 'lr')
-y.set(4, 'll')
-y.set(5, 'rl')
-y.set(6, 'rr')
-y.set(7, 'lrl')
-y.set(8, 'lrr')
-y.set(9, 'rll')
-y.set(10, 'rlr')
+req = new XMLHttpRequest()
+req.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        let rec = JSON.parse(this.response)
+        for (let e of rec) {
+            let x = JSON.stringify(e)
+            let y = Parser.parse(x)
+            data.push(y)
+            console.log(y)
+        }
+    }
+}
+req.open("GET", "data.json", true)
+req.send()

@@ -1,0 +1,5 @@
+[
+    {"_class":"CList","array":[1,2,3,4,5]},
+    {"_class":"Graph","array":[{"value":0,"path":""},{"value":1,"path":"l"},{"value":2,"path":"ll"},{"value":3,"path":"lll"},{"value":4,"path":"llll"},{"value":5,"path":"lr"},{"value":6,"path":"lrl"},{"value":7,"path":"lrr"},{"value":8,"path":"r"},{"value":9,"path":"rl"},{"value":10,"path":"rll"},{"value":11,"path":"rlr"},{"value":12,"path":"rr"}]},
+    {"_class":"CList","array":["water", "flour", "dought", "cake"]}
+]
